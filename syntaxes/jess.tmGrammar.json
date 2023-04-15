@@ -1,0 +1,150 @@
+{
+    "scopeName": "source.jess",
+    "patterns": [
+        {"include": "#comment-group"},
+        {"include": "#string-group"},
+        {"include": "#number"},
+        {"include": "#constant"},
+        {"include": "#variable-group"},
+        {"include": "#function-group"}
+    ],
+    "repository": {
+        "comment-group": {
+            "patterns": [
+                {"include": "#line-comment"},
+                {"include": "#block-comment"}
+            ]
+        },
+        "line-comment": {
+            "name": "comment.line.semicolon",
+            "begin": ";",
+            "end": "$"
+        },
+        "block-comment": {
+            "name": "comment.block.documentation",
+            "begin": "/\\*",
+            "end": "\\*/"
+        },
+        "string-group": {
+            "patterns": [
+                {"include": "#single-string"},
+                {"include": "#multi-string"}
+            ]
+        },
+        "single-string": {
+            "name": "string.quoted.double",
+            "match": "\"((\\\\.)|[^\\\\\"])*\""
+        },
+        "multi-string": {
+            "name": "string.quoted.double.multiline",
+            "begin": "\"",
+            "end": "(\n|[^\\\\])(\\\\\\\\)*\""
+        },
+        "number": {
+            "name": "constant.numeric",
+            "match": "(?<![a-zA-Z0-9_-])\\-?\\d*((\\dl?)|(\\.\\d*))(?![a-zA-Z0-9_-])"
+        },
+        "constant": {
+            "name": "constant.language",
+            "match": "(?<![a-zA-Z0-9_-])(TRUE|FALSE|nil|crlf|t|NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|TAB|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|DEL|EOF)(?![a-zA-Z0-9_-])"
+        },
+        "variable-group": {
+            "patterns": [
+                {"include": "#variable"},
+                {"include": "#global"}
+            ]
+        },
+        "variable": {
+            "name": "variable",
+            "match": "(?<![a-zA-Z0-9_\\*-])(\\?[a-zA-Z0-9_-]*)(?![a-zA-Z0-9_\\*-])"
+        },
+        "global": {
+            "name": "variable.global",
+            "match": "(?<![a-zA-Z0-9_\\*-])(\\?\\*[a-zA-Z0-9_-]*\\*)(?![a-zA-Z0-9_\\*-])"
+        },
+        "function-group": {
+            "patterns": [
+                {"include": "#misc"},
+                {"include": "#io"},
+                {"include": "#java"},
+                {"include": "#logic"},
+                {"include": "#debug"},
+                {"include": "#query"},
+                {"include": "#control"},
+                {"include": "#pprint"},
+                {"include": "#rule"},
+                {"include": "#op"},
+                {"include": "#math"},
+                {"include": "#type"},
+                {"include": "#string"},
+                {"include": "#list"},
+                {"include": "#fact"},
+                {"include": "#def"}
+            ]
+        },
+        "misc": {
+            "name": "keyword.misc",
+            "match": "(?<![a-zA-Z0-9_-])(bag|bind|clear-storage|fetch|gensym\\*|help|jess-version-number|jess-version-string|set-factory|setgen|store|system|time)(?![a-zA-Z0-9_-])"
+        },
+        "io": {
+            "name": "keyword.io",
+            "match": "(?<![a-zA-Z0-9_-])(close|format|get-multithread-io|open|printout|read|readline|set-multithread-io|socket)(?![a-zA-Z0-9_-])"
+        },
+        "java": {
+            "name": "keyword.java",
+            "match": "(?<![a-zA-Z0-9_-])(add|as-list|call|catch|context|defclass|definstance|finally|get|get-member|implement|import|instanceof|load-function|load-package|new|set|set-member|set-nonvalue-class|set-value-class|synchronized|throw|try|undefinstance|update)(?![a-zA-Z0-9_-])"
+        },
+        "logic": {
+            "name": "keyword.logic",
+            "match": "(?<![a-zA-Z0-9_-])(and|bit-and|bit-not|bit-or|not|or)(?![a-zA-Z0-9_-])"
+        },
+        "debug": {
+            "name": "keyword.debug",
+            "match": "(?<![a-zA-Z0-9_-])(jess-type|list-function\\$|matches|set-watch-router|show-jess-listeners|unwatch|view|watch)(?![a-zA-Z0-9_-])"
+        },
+        "query": {
+            "name": "keyword.query",
+            "match": "(?<![a-zA-Z0-9_-])(count-query-results|run-query|run-query\\*)(?![a-zA-Z0-9_\\$-])"
+        },
+        "control": {
+            "name": "keyword.structure",
+            "match": "(?<![a-zA-Z0-9_-])(apply|break|call-on-engine|continue|do|else|filter|for|foreach|if|lambda|map|progn|return|then|while)(?![a-zA-Z0-9_-])"
+        },
+        "pprint": {
+            "name": "keyword.pprint",
+            "match": "(?<![a-zA-Z0-9_-])(list-deftemplates|ppdeffacts|ppdeffunction|ppdefglobal|ppdefquery|ppdefrule|ppdeftemplate|rules|show-deffacts|show-deftemplates)(?![a-zA-Z0-9_-])"
+        },
+        "rule": {
+            "name": "keyword.rule",
+            "match": "(?<![a-zA-Z0-9_-])(accumulate|agenda|batch|bload|bsave|build|clear|clear-focus-stack|declare|defadvice|do-backward-chaining|engine|eval|exit|focus|forall|get-current-module|get-focus|get-focus-stack|get-reset-globals|get-salience-evaluation|get-strategy|halt|list-focus-stack|no-loop|pop-focus|provide|require|require\\*|reset|run|run-until-halt|set-current-module|set-node-index-hash|set-reset-globals|set-salience-evaluation|set-strategy|undefadvice|undeffacts|undefrule)(?![a-zA-Z0-9_-])"
+        },
+        "op": {
+            "name": "keyword.op",
+            "match": "(?<![a-zA-Z0-9_-])(\\*|\\*\\*|\\+|\\+\\+|\\-|\\-\\-|/|<|<=|<>|=|>|>=|=>|:|&|~|\\||<-)(?![a-zA-Z0-9_-])"
+        },
+        "math": {
+            "name": "keyword.math",
+            "match": "(?<![a-zA-Z0-9_-])(abs|div|e|eq|eq\\*|exp|float|integer|log|log10|long|max|min|mod|neq|pi|random|round|sqrt)(?![a-zA-Z0-9_-])"
+        },
+        "type": {
+            "name": "keyword.type",
+            "match": "(?<![a-zA-Z0-9_-])(evenp|external-addressp|floatp|integerp|java-objectp|lexemep|listp|longp|multifieldp|numberp|oddp|stringp|subsetp|symbolp)(?![a-zA-Z0-9_-])"
+        },
+        "string": {
+            "name": "keyword.string",
+            "match": "(?<![a-zA-Z0-9_-])(asc|lowcase|regexp|str-cat|str-compare|str-index|str-length|sub-string|sym-cat|upcase)(?![a-zA-Z0-9_-])"
+        },
+        "list": {
+            "name": "keyword.list",
+            "match": "(?<![a-zA-Z0-9_-])(complement\\$|create\\$|delete\\$|explode\\$|first\\$|implode\\$|insert\\$|intersection\\$|length\\$|list|member\\$|nth\\$|replace\\$|rest\\$|subseq\\$|union\\$)(?![a-zA-Z0-9_-])"
+        },
+        "fact": {
+            "name": "keyword.fact",
+            "match": "(?<![a-zA-Z0-9_-])(assert|assert-string|dependencies|dependents|duplicate|fact-id|fact-slot-value|facts|load-facts|modify|multislot|remove|retract|retract-string|save-facts|save-facts-xml|slot|test)(?![a-zA-Z0-9_-])"
+        },
+        "def": {
+            "name": "keyword.def",
+            "match": "(?<![a-zA-Z0-9_-])(deffunction|defglobal|defmodule|deftemplate|defrule|defquery)(?![a-zA-Z0-9_-])"
+        }
+    }
+}
