@@ -1,6 +1,6 @@
-# jess README
+# JESS but Less of a Mess
 
-This extension colors your JESS code.
+This extension colors your Sandia Labs JESS code.
 
 ## Features
 
